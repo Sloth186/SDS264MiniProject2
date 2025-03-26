@@ -11,7 +11,6 @@ editor_options:
 
 We are looking at soccer states for the Major Leauge and potentially other football competitions. 
 
-re
 ## Motivation
 
 We chose this data mostly out of curiosity - one of us like to stay up to date with the football news, while the other is a casual player of FC25. This data contains general statistics about matches, players, teams, competitions, etc. such as how many matches each team played, wins and losses, points in the league, so on. We would like to explore if there are any correlations to be found between various variables - a couple that we have in mind currently are avg. age vs goals and avg. age vs possession.
