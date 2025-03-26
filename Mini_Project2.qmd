@@ -22,7 +22,6 @@ Include:
 ## Scraping the “Squad Standard Stats” table:
 
 ```{r}
-
 library(rvest)
 library(dplyr)
 library(janitor)
@@ -49,7 +48,25 @@ Squad2_cleaned <- Squad2 |>
   select(1:16) |>                   # keep only the first 16 columns
   filter(squad != "Squad") |>       # remove header repeats if any
   mutate(across(2:16, parse_number))# apply parse_number to cols 2–16
+```
 
+```{r}
+# Custom Function
+scrape_fbref_table <- function(url, table_number = 5, n_cols = 16) {
+  page <- read_html(url)
+  tables <- html_nodes(page, "table")
+  raw_table <- html_table(tables, fill = TRUE)[[table_number]]
+  
+  cleaned_table <- raw_table |>
+    row_to_names(row_number = 1) |>
+    clean_names() |>
+    select(1:n_cols) |>
+    filter(squad != "Squad") |>
+    mutate(across(2:n_cols, parse_number))
+  
+  return(cleaned_table)
+}
 
+Squad2_cleaned <- scrape_fbref_table("https://fbref.com/en/comps/22/Major-League-Soccer-Stats")
 ```
 
