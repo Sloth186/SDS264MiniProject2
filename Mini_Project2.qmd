@@ -22,6 +22,7 @@ Include:
 ## Scraping the “Squad Standard Stats” table:
 
 ```{r}
+
 library(rvest)
 library(dplyr)
 library(janitor)
@@ -40,6 +41,15 @@ html_table(Squad, header = TRUE, fill = TRUE)  # find right table
 # Step 3: Extract the correct table (the fifth table on the page)
 Squad2 <- html_table(Squad, header = TRUE, fill = TRUE)[[5]]
 Squad2
+
+# Step 4: Keep only relevant columns and clean the data
+Squad2_cleaned <- Squad2 |>
+  row_to_names(row_number = 1) |>   # promotes row 1 to column names
+  clean_names() |>                  # make the column names snake_case
+  select(1:16) |>                   # keep only the first 16 columns
+  filter(squad != "Squad") |>       # remove header repeats if any
+  mutate(across(2:16, parse_number))# apply parse_number to cols 2–16
+
 
 ```
 
