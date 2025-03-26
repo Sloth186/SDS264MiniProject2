@@ -58,7 +58,7 @@ scrape_fbref_table <- function(url, table_number = 5, n_cols = 16) {
     clean_names() |>
     select(1:n_cols) |>
     filter(squad != "Squad") |>
-    mutate(across(2:n_cols, parse_number))
+    mutate(across(all_of(2:n_cols), parse_number))
   
   return(cleaned_table)
 }
