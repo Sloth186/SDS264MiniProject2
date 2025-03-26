@@ -1,0 +1,45 @@
+---
+title: "Mini-Project2"
+author: "Tenzin Gyaltsen, Shen Rothermel"
+format:
+  pdf: default
+editor_options: 
+  chunk_output_type: console
+---
+
+## Introduction
+
+- blah, blah, yap, yap. 
+
+## Motivation
+
+Include:
+
+- What kind of data you're scraping
+- Why you're interested in it
+- Example questions you'd like to answer
+
+## Scraping the “Squad Standard Stats” table:
+
+```{r}
+library(rvest)
+library(dplyr)
+library(janitor)
+library(stringr)
+
+# Check permissions for the specific stats page
+robotstxt::paths_allowed("https://fbref.com/en/comps/22/Major-League-Soccer-Stats")
+
+# Step 1: Read the page with rvest
+MLS_table <- read_html("https://fbref.com/en/comps/22/Major-League-Soccer-Stats")
+
+# Step 2: Extract tables from the page
+Squad <- html_nodes(MLS_table, "table")
+html_table(Squad, header = TRUE, fill = TRUE)  # find right table
+
+# Step 3: Extract the correct table (the fifth table on the page)
+Squad2 <- html_table(Squad, header = TRUE, fill = TRUE)[[5]]
+Squad2
+
+```
+
