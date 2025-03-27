@@ -9,7 +9,7 @@ editor_options:
 
 ## Introduction
 
-We are looking at soccer states for the Major Leauge and potentially other football competitions. 
+We are looking at soccer states for the Major League and potentially other football competitions. One link that we look at is: https://fbref.com/en/comps/22/Major-League-Soccer-Stats
 
 ## Motivation
 
@@ -21,7 +21,9 @@ We chose this data mostly out of curiosity - one of us like to stay up to date w
 library(rvest)
 library(dplyr)
 library(janitor)
+library(readr)
 library(stringr)
+library(maps)
 
 # Check permissions for the specific stats page
 robotstxt::paths_allowed("https://fbref.com/en/comps/22/Major-League-Soccer-Stats")
@@ -65,4 +67,3 @@ scrape_fbref_table <- function(url, table_number = 5, n_cols = 16) {
 
 Squad2_cleaned <- scrape_fbref_table("https://fbref.com/en/comps/22/Major-League-Soccer-Stats")
 ```
-
