@@ -46,6 +46,7 @@ Squad2_cleaned <- Squad2 |>
   select(1:16) |>                   # keep only the first 16 columns
   filter(squad != "Squad") |>       # remove header repeats if any
   mutate(across(2:16, parse_number))# apply parse_number to cols 2–16
+Squad2_cleaned
 ```
 
 ```{r}
@@ -66,4 +67,5 @@ scrape_fbref_table <- function(url, table_number = 5, n_cols = 16) {
 }
 
 Squad2_cleaned <- scrape_fbref_table("https://fbref.com/en/comps/22/Major-League-Soccer-Stats")
+Squad2_cleaned
 ```
